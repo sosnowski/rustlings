@@ -10,6 +10,16 @@
 // Put your function here!
 // fn ..... {
 
+fn calculate_price(number: usize) -> usize {
+    let price = if number > 40 {
+        1
+    } else {
+        2
+    };
+
+    return number * price;
+}
+
 // Don't modify this function!
 #[test]
 fn verify_test() {
