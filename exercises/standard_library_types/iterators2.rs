@@ -9,7 +9,7 @@ pub fn capitalize_first(input: &str) -> String {
     let mut c = input.chars();
     match c.next() {
         None => String::new(),
-        Some(first) => first.collect::<String>() + c.as_str(),
+        Some(first) => first.to_uppercase().collect::<String>() + c.as_str(),
     }
 }
 
@@ -29,18 +29,23 @@ mod tests {
         assert_eq!(capitalize_first(""), "");
     }
 
-    // Step 2.
+    // // Step 2.
     #[test]
     fn test_iterate_string_vec() {
         let words = vec!["hello", "world"];
-        let capitalized_words: Vec<String> = // TODO
+        let capitalized_words: Vec<String> = words.iter().map(|v| capitalize_first(v)).collect();
         assert_eq!(capitalized_words, ["Hello", "World"]);
     }
 
     #[test]
     fn test_iterate_into_string() {
         let words = vec!["hello", " ", "world"];
-        let capitalized_words = // TODO
+        let capitalized_words = words.iter()
+            .map(|v| v.trim())
+            .filter(|v| v.len() > 0)
+            .map(|v| capitalize_first(v))
+            .collect::<Vec<String>>()
+            .join(" ");
         assert_eq!(capitalized_words, "Hello World");
     }
 }
